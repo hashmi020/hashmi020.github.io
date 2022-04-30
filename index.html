@@ -1,249 +1,108 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    <title>Document</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>[M7medfaleh]</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel='stylesheet' href='//cdn.jsdelivr.net/font-hack/2.020/css/hack.min.css'>
+
+    
+
 </head>
+
 <body>
-    
-<header>
-<div class="header">
-    <h1>hello</h1>
-    <p id="name">Guest</p>
-</div>
-</header>
 
+    <body>
 
-<div class="explain">
-    <h3>Sign in</h3>
-    <p>Enter your random 4-digit pin provided to you.</p>
-</div>
+        <div class="navbar-dark text-white">
+            <div class="container">
+                <nav class="navbar px-0 navbar-expand-lg navbar-dark">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
 
+                            <a href="https://www.linkedin.com/in/m7medfaleh/" class="p-3 text-decoration-none"> Linkedin</a>
 
-<div class="pin-section">
+                            <a href="https://twitter.com/M7medFaleh" class="p-3 text-decoration-none">Twitter</a>
 
-    <div class="label" id="label">
-        <p>Enter pin</p>
-    </div>
+                            <a href="https://github.com/M7medfaleh" class="p-3 text-decoration-none ">Github</a>
+                           
+                        </div>
+                    </div>
+                </nav>
 
-    <div class="input-container">
-        <input type="number" id="pin" onclick="goup()" onblur="godown()" autocomplete="off">
-    </div>
-
-</div>
-
-<div class="button-container">
-    <button onclick="login()">Login now</button>
-</div>
-
-
-
-<footer>
-
-    <p>This was developed by owner of tariqhashmi.me</p>
-    
-    <br>
-    
-    <button>Visit  site</button>
-</footer>
-
-
-
-</body>
-</html>
-
-<script>
-
-var digit1 = Math.floor(Math.random()*10);
-var digit2 = Math.floor(Math.random()*10);
-var digit3 = Math.floor(Math.random()*10);
-var digit4 = Math.floor(Math.random()*10);
-
-var randomPIN = digit1 +""+ digit2 +""+ digit3 +""+ digit4;
-
-alert(randomPIN)
-
-function login(){
-    var enteredPIN = document.getElementById('pin').value;
-
-    if(enteredPIN == ""){
-        goup()
-        document.getElementById("pin").focus();
-    }
-
-    else if(enteredPIN == randomPIN){
-        document.getElementById("pin").style.color = "green";
-        document.getElementById('label').innerHTML = 'Welcome';
-        document.getElementById("pin").style.borderBottomColor = "green";
-
-        window.document.location='homepage.html';
-    }
-    else{
-        document.getElementById("pin").style.color = "red";
-        document.getElementById('label').innerHTML = 'Wrong pin';
-        document.getElementById("pin").style.borderBottomColor = "red";
-    }
-
-}
-
-function goup(){
-   document.getElementById('label').classList.toggle('rotated-label');
-   document.getElementById("pin").classList.remove('move-pin');
-   document.getElementById('label').innerHTML = 'Enter pin';
-}
-
-function godown(){
-    if(document.getElementById("pin").value == ""){
-        document.getElementById('label').classList.remove('rotated-label');
-    }
-    else{
-        document.getElementById('label').classList.remove('rotated-label');
-        document.getElementById('label').innerHTML = 'Login now';
-        document.getElementById('label').style.color = "dodgerblue";
-        document.getElementById("pin").classList.toggle('move-pin');
-    }
-}
-
-</script>
-
-<style>
-
-
-footer{
-    width: 90%;
-    margin: 50px auto 0px auto;
-    text-align: center;
-    font-size: 13px;
-    color: rgb(143, 143, 143);
-    padding: 20px;
-}
-
-footer button{
-    padding: 5px 20px;
-    color: rgb(124, 124, 124);
-    font-size: 12px;
-    border: 1px solid lightgray;
-    outline: none;
-}
-
-.explain{
-    width: 90%;
-    margin: auto;
-    padding: 20px 0px;
-}
-.explain h3{
-    font-size: 28px;
-    color: rgb(92, 160, 205);
-}
-.explain p{
-    font-size: 13px;
-    color: dimgray;
-    padding: 5px 0px 0px 3px;
-}
-
-.button-container{
-    width: 90%;
-    margin: auto;
-}
-
-.button-container button{
-    color: white;
-    width: 100%;
-    height: 42px;
-    border: none;
-    border-radius: 4px;
-    outline: none;
-    background-image: linear-gradient(45deg,rgb(31, 74, 201), dodgerblue);
-}
-
-.pin-section{
-    width: 90%;
-    margin: 20px auto;
-    position: relative;
-}
-
-.label{
-    font-size: 15px;
-    position: absolute;
-    bottom: 15px;
-    left: 1px;
-    color: dimgray;
-    background-color: white;
-    pointer-events: none;
-    transition: 0.5s;
-}
-
-.rotated-label{
-    transform: rotate(-90deg);
-    font-size: 10px;
-    color: dodgerblue;
-    top: 0;
-    left: -10px;
-}
-
-.input-container{
-    width: 100%;
-}
-
-.input-container input{
-    width: 100%;
-    height: 40px;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: 2px solid dimgray;
-    outline: none;
-    padding-left: 25px;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.move-pin{
-    text-align: right;
-    color: dodgerblue;
-}
-
-.input-container input:hover{
-    border-bottom: 2px solid dodgerblue;
-}
+            </div>
+        </div>
 
 
 
 
-*{
-    padding: 0;
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    box-sizing: border-box;
-}
 
-.header{
-    width: 90%;
-    margin: auto;
-    text-align: center;
-    color: white;
-    padding: 15px;
-}
-header{
-    background-image: linear-gradient(80deg,royalblue, royalblue, royalblue, dodgerblue, dodgerblue);
-}
-.header h1{
-    font-size: 60px;
-    font-family: 'Lobster', cursive;
-}
-.header p{
-    font-size: 16px;
-    font-weight: bold;
-    padding-top: 6px;
-}
+        <div class="jumbotron bg-transparent mb-0 radius-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6">
+                        <h1 class="display-2">[Mohammed Faleh<span class="vim-caret">]</span></h1>
+                        <div class="text-mono">
+
+
+                        </div>
+
+                        <div class="text-darkgrey text-mono my-2">You can do anything you set your mind to</div>
+            
+                       
+                           
+                        </p>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
 
-</style>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+       
+    </body>
+
+    <footer>
+        <div class="jumbotron bg-transparent mb-0 radius-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6">
+                        <h7 class="text-darkgrey text-mono my-2">Copyright quberplatform.net 2021</h7>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <html>
+
+
+
+
+
+
+
+
+
+
+
