@@ -1,82 +1,48 @@
-var notes = [];
+var app = angular.module('WikiApp', ['ngAnimate']);
+app.controller('MainCtrl', function($scope, $http, $timeout) {
+  var form = $('form');
+  var close = $('.eks');
+  var input = $('input');
+  var search = $("#search");
+  var help = $("#help");
+  
+  $scope.results = [];
 
-// Registering all the event handlers when the page loads
-document.addEventListener("DOMContentLoaded", event => {
-    if (localStorage.getItem("notes")) {
-        notes = JSON.parse(localStorage.getItem("notes"));
+  close.on('click', function() {
+    form.toggleClass('open');
+    
+    if (!form.hasClass('open') && $scope.searchTxt !== '' && typeof $scope.searchTxt !== 'undefined') {
+	    search.toggleClass('fullHeight')
+      help.toggleClass('hide');
+      $scope.searchTxt = '';
+    } 
+    $scope.results = [];
+    $scope.$apply();
+  })
+
+  input.on('transitionend webkitTransitionEnd oTransitionEnd', function() {
+    if (form.hasClass('open')) {
+      input.focus();
+    } else {
+      return;
     }
-    renderNotes();
- 
-    document.querySelector("form").addEventListener("submit", event => {
-        event.preventDefault();
-        const note = document.querySelector("textarea").value;
-        if (note.length==0) {
-            alert("You didn't input any content");
-        } else {
-            notes.push(note);
-            renderNotes();
-            save();
-            document.querySelector("textarea").value = "";
-        }
+  })
+
+  $scope.search = function() {
+    $scope.results = [];
+    help.addClass('hide');
+    search.removeClass('fullHeight');
+    var title = input.val();
+    var api = 'https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=';
+    var cb = '&callback=JSON_CALLBACK';
+    var page = 'https://en.wikipedia.org/?curid=';
+    
+    $http.jsonp(api + title + cb)
+    .success(function(data) {
+      var results = data.query.pages;
+      angular.forEach(results, function(v,k)  {
+        $scope.results.push({title: v.title, body: v.extract, page: page + v.pageid})
+      })
     });
-
-
-    document.querySelector("#btnLearn").addEventListener("click", event => {
-        location.href = "https://github.com/hashmi020";
-    })
-
-    let bipEvent = null;
-    window.addEventListener("beforeinstallprompt", event => {
-        event.preventDefault();
-        bipEvent = event;
-    })
-
-    document.querySelector("#btnInstall").addEventListener("click", event => {
-        if (bipEvent) {
-            bipEvent.prompt();
-        } else {
-            // incompatible browser, your PWA is not passing the criteria, the user has already installed the PWA
-            //TODO: show the user information on how to install the app
-            alert("To install the app look for Add to Homescreen or Install in your browser's menu");
-        }
-    })
-
-    document.querySelector("#btnShare").addEventListener("click", event => {
-        let notesString = "";
-        for (let note of notes) {
-            notesString += note + " | "
-        }
-        navigator.share({
-            title: "Codepad",
-            text: notesString
-        })
-    })
-})
-
-// Render the notes on the DOM
-function renderNotes() {
-    const ul = document.querySelector("#notes");
-    ul.innerHTML = "";
-    notes.forEach( (note, index) => {
-        // Create the note LI
-        const li = document.createElement("li");
-        li.innerHTML = note;
-        // Delete element for each note
-        const deleteButton = document.createElement("a");
-        deleteButton.innerHTML = '<span class="icon">delete</span>';
-        deleteButton.addEventListener("click", event => {
-            if (confirm("Do you want to delete this note?")) {
-                notes.splice(index, 1);
-                renderNotes();
-                save();
-            }
-        });
-        li.appendChild(deleteButton);
-        ul.appendChild(li);
-    })
-}
-
-
-function save() {
-    localStorage.setItem("notes", JSON.stringify(notes));
-}
+  }
+});
