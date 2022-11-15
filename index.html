@@ -1,52 +1,14 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width,viewport-fit=cover">
-    <title>Store notes and learning goals while you are coding</title>
-    <link rel="manifest" href="app.webmanifest?1">
-    <link rel="stylesheet" href="styles.css">
-    <script src="app.js"></script> 
-    <script src="sw-register.js"></script>
-    <meta name="theme-color" content="#ffc252">
-    <link rel="apple-touch-icon" href="icons/icon-512.png">
-</head>
-
-<body>
-    <h1>Codepad Masters</h1>
-    <form>
-        <textarea placeholder="Enter your new note"></textarea>
-        <ul id="toolbar">
-            <li>
-                <button type="submit">
-                    <span class="icon">save</span>                
-                    Save
-                </button>
-            </li>
-        </ul>
-    </form>
-    <ul id="toolbar">
-        <li>
-            <button id="btnLearn">
-                <span class="icon">school</span>                
-                Learn                 
-            </button>
-        </li>
-        <li>
-            <button id="btnShare">
-                <span class="icon">share</span>                
-                Share                 
-            </button>
-        </li>
-        <li id="itemInstall">
-            <button id="btnInstall">
-                <span class="icon">download</span>                
-                Install                 
-            </button>
-        </li>
-    </ul>
-    <ul id="notes">
-
-
-    </ul>
-</body>
-</html>
+main(ng-app='WikiApp' ng-controller='MainCtrl')
+  #search.wrapper.fullHeight
+    a.white-text(href='https://en.wikipedia.org/wiki/Special:Random' target='_blank') Click here for a random article
+    br
+    form(ng-submit='search()')
+      input(type='text' ng-model='searchTxt')
+      .eks
+    p.white-text#help Click icon to search
+  .wrapper
+    ul
+      a(ng-href='{{result.page}}' target='_blank' ng-repeat='result in results')
+        li
+          h1 {{result.title}}
+          p {{result.body}}
