@@ -1,48 +1,159 @@
-var app = angular.module('WikiApp', ['ngAnimate']);
-app.controller('MainCtrl', function($scope, $http, $timeout) {
-  var form = $('form');
-  var close = $('.eks');
-  var input = $('input');
-  var search = $("#search");
-  var help = $("#help");
-  
-  $scope.results = [];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jedus0r</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
 
-  close.on('click', function() {
-    form.toggleClass('open');
+</head>
+<body>
+    <div class="scroll-up-btn">
+        <i class="fas fa-angle-up"></i>
+    </div>
+    <nav class="navbar">
+        <div class="max-width">
+            <div class="logo"><a href="#">Tar<span>iq.</span></a></div>
+            <ul class="menu">
+                <li><a href="#home" class="menu-btn">Home</a></li>
+                <li><a href="#about" class="menu-btn">About</a></li>
+                <li><a href="#services" class="menu-btn">Interests</a></li>
+                <li><a href="#teams" class="menu-btn">Articles</a></li>
+                <li><a href="#contact" class="menu-btn">Contact</a></li>
+            </ul>
+            <div class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- home section start -->
+    <section class="home" id="home">
+        <div class="max-width">
+            <div class="home-content">
+                <div class="text-1">Hello, ping me as</div>
+                <div class="text-2">Jedus0r</div>
+                <div class="text-3">And I'm a <span class="typing"></span></div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- about section start -->
+    <section class="about" id="about">
+        <div class="max-width">
+            <h2 class="title">About me</h2>
+            <div class="about-content">
+                <div class="column left">
+                    <img src="images/profile-1.jpeg" alt="">
+                </div>
+                <div class="column right">
+                    <div class="text">I'm Tariq and I'm a <span class="typing-2"></span></div>
+                    <p>I spent the last 6 years working in several IT Services first as Network/System Administrator, and in a second time as Pentester.
+                    I chose to specialize in cybersecurity by passion, and also after watching Mr Robot series </p>
     
-    if (!form.hasClass('open') && $scope.searchTxt !== '' && typeof $scope.searchTxt !== 'undefined') {
-	    search.toggleClass('fullHeight')
-      help.toggleClass('hide');
-      $scope.searchTxt = '';
-    } 
-    $scope.results = [];
-    $scope.$apply();
-  })
+                </div>
+            </div>
+        </div>
+    </section>
 
-  input.on('transitionend webkitTransitionEnd oTransitionEnd', function() {
-    if (form.hasClass('open')) {
-      input.focus();
-    } else {
-      return;
-    }
-  })
+    <!-- services section start -->
+    <section class="services" id="services">
+        <div class="max-width">
+            <h2 class="title">My Interests</h2>
+            <div class="serv-content">
+                <div class="card">
+                    <div class="box">
+                        <i class="fas fa-paint-brush"></i>
+                        <div class="text">Penetration Testing</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="text">Bug Bounty</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <i class="fas fa-code"></i>
+                        <div class="text">IT Infrastructure</div>
+                    </div>
+                </div>
+               </div>
+            </div>
+        </div>
+    </section>
 
-  $scope.search = function() {
-    $scope.results = [];
-    help.addClass('hide');
-    search.removeClass('fullHeight');
-    var title = input.val();
-    var api = 'https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=';
-    var cb = '&callback=JSON_CALLBACK';
-    var page = 'https://en.wikipedia.org/?curid=';
-    
-    $http.jsonp(api + title + cb)
-    .success(function(data) {
-      var results = data.query.pages;
-      angular.forEach(results, function(v,k)  {
-        $scope.results.push({title: v.title, body: v.extract, page: page + v.pageid})
-      })
-    });
-  }
-});
+   
+    <!-- teams section start -->
+    <section class="teams" id="teams">
+        <div class="max-width">
+            <h2 class="title">My Articles</h2>
+            <div class="carousel owl-carousel">
+                <div class="card">
+                    <div class="box">
+                        <img src="images/oscp.png" alt="">
+                        <div class="text">OSCP Certification</div>
+                        <a href="https://medium.com/@syedtariqhashmi07" target="blank" style="color:grey">How I passed the OSCP certification in first attempt, and hacked the 5/5 targets of the exam.</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <img src="images/keep.png" alt="">
+                        <div class="text">Come Back Later</div>
+                        <p>Others articles in progress.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- contact section start -->
+    <section class="contact" id="contact">
+        <div class="max-width">
+            <h2 class="title">Contact me</h2>
+            <div class="contact-content">
+                <div class="column left">
+                    <div class="text">Get in Touch</div>
+                    <div class="icons">
+                        <div class="row">
+                            <div class="info">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="info">
+                                <div class="head"> Location</div>
+                                <div class="sub-title">India</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <i class="fas fa-envelope"></i>
+                            <div class="info">
+                                <div class="head">Linkedin</div>
+                                <div class="sub-title">hashmi020</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               <script src=""></script>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer section start -->
+    <footer>
+        <span>Created By <a href="https://github.com/hashmi020/hashmi020.github.io">hashmi020</a> | <span class="far fa-copyright"></span> 2021 All rights reserved.</span>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
